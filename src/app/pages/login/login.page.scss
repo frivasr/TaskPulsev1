@@ -1,0 +1,148 @@
+// Estilo moderno y minimal (glassmorphism + acentos neón)
+:host {
+  font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, Roboto, Arial, sans-serif;
+
+  .winlock-bg {
+    --background: linear-gradient(135deg, #0b1021, #1a1f3b);
+    position: relative;
+    min-height: 100vh;
+    overflow: hidden;
+  }
+
+  .winlock-bg::before {
+    content: '';
+    position: absolute;
+    inset: -20% -10% -10% -20%;
+    background: radial-gradient(60% 60% at 30% 20%, rgba(125, 249, 255, 0.18) 0%, rgba(155, 93, 229, 0.14) 35%, rgba(0,0,0,0) 70%),
+                radial-gradient(45% 45% at 80% 70%, rgba(255, 89, 194, 0.12) 0%, rgba(0,0,0,0) 65%);
+    filter: blur(42px);
+    animation: login-bg-shift 18s ease-in-out infinite alternate;
+    pointer-events: none;
+  }
+
+  @keyframes login-bg-shift {
+    0% { transform: translate3d(0,0,0) scale(1); opacity: 0.8; }
+    50% { transform: translate3d(-2%, 1%, 0) scale(1.03); opacity: 1; }
+    100% { transform: translate3d(2%, -1%, 0) scale(1.02); opacity: 0.9; }
+  }
+
+  .winlock-wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+  }
+
+  .winlock-center {
+    width: min(420px, 94vw);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    color: #eaf2ff;
+    background: rgba(17, 24, 39, 0.6);
+    border: 1px solid rgba(125, 249, 255, 0.25);
+    border-radius: 18px;
+    box-shadow: 0 16px 40px rgba(0,0,0,0.45), 0 0 24px rgba(125, 249, 255, 0.12);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 18px 16px;
+    gap: 10px;
+  }
+
+  .app-title {
+    font-size: clamp(28px, 6vw, 44px);
+    font-weight: 900;
+    letter-spacing: 0.6px;
+    text-align: center;
+    /* Texto con gradiente */
+    background: linear-gradient(135deg, #7df9ff, #9b5de5);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin: 2px 0 12px;
+    text-shadow: 0 0 16px rgba(125, 249, 255, 0.28);
+  }
+
+  .winlock-avatar {
+    width: 92px; height: 92px;
+    background: rgba(20,28,46,0.72);
+    border-radius: 50%;
+    border: 1px solid rgba(125, 249, 255, 0.25);
+    display: grid; place-items: center;
+    margin-bottom: 14px;
+    box-shadow: 0 10px 24px rgba(0,0,0,0.35);
+    ion-icon { font-size: 84px; color: #eaf2ff; }
+  }
+
+  .winlock-title {
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; font-weight: 700;
+    margin-bottom: 12px;
+    color: #cbd6e3;
+  }
+
+  .winlock-form { width: 100%; }
+
+  .winlock-input {
+    --background: rgba(20,28,46,0.72);
+    --border-radius: 12px;
+    --padding-start: 12px;
+    margin: 10px 0;
+    color: #eaf2ff;
+    border: 1px solid rgba(125, 249, 255, 0.18);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    ion-icon { color: rgba(125, 249, 255, 0.9); }
+    ion-input::part(native) { color: #eaf2ff; }
+    ion-button { color: #eaf2ff; }
+  }
+
+  .winlock-remember {
+    --background: transparent;
+    color: #b7c4d6;
+    margin: 4px 0 12px;
+  }
+
+  .winlock-submit {
+    --background: linear-gradient(135deg, #7df9ff, #9b5de5);
+    --color: #0b1021;
+    --border-radius: 12px;
+    height: 46px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    box-shadow: 0 10px 24px rgba(0,0,0,0.35), 0 0 16px rgba(125, 249, 255, 0.22);
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .winlock-submit:hover { transform: translateY(-1px); box-shadow: 0 14px 30px rgba(0,0,0,0.45), 0 0 22px rgba(125, 249, 255, 0.28); }
+
+  :host-context(.light), :host-context(.md) {
+    .winlock-bg { --background: linear-gradient(135deg, #eef3ff, #e7f3ff); }
+    .winlock-center { color: #0f172a; background: rgba(255,255,255,0.78); border-color: rgba(155, 93, 229, 0.22); box-shadow: 0 12px 28px rgba(2, 8, 23, 0.12); }
+    .app-title { text-shadow: none; }
+    .winlock-avatar { background: rgba(255,255,255,0.65); border-color: rgba(155, 93, 229, 0.22); ion-icon { color: #0f172a; } }
+    .winlock-title { color: rgba(15,23,42,0.7); }
+    .winlock-input { --background: rgba(255,255,255,0.9); color: #0f172a; border-color: rgba(2,8,23,0.08); box-shadow: 0 8px 20px rgba(2,8,23,0.06); ion-icon { color: rgba(2,8,23,0.8); } ion-input::part(native) { color: #0f172a; } }
+    .winlock-remember { color: rgba(2,8,23,0.7); }
+    .winlock-submit { --color: #ffffff; }
+  }
+
+  /* Responsividad */
+  @media (max-width: 480px) {
+    .winlock-wrapper { justify-content: flex-start; padding-top: clamp(12px, 7vh, 48px); }
+    .winlock-center { width: 95vw; padding: 14px 12px; border-radius: 16px; }
+    .winlock-title { font-size: 16px; }
+    .winlock-avatar { width: 76px; height: 76px; ion-icon { font-size: 68px; } }
+    .winlock-input { margin: 6px 0; }
+    .winlock-submit { height: 44px; }
+  }
+  @media (max-height: 700px) {
+    .winlock-wrapper { justify-content: flex-start; padding-top: clamp(8px, 6vh, 40px); }
+    .winlock-avatar { width: 72px; height: 72px; ion-icon { font-size: 64px; } }
+    .app-title { margin-bottom: 8px; }
+  }
+  @media (min-width: 768px) {
+    .winlock-center { width: 420px; }
+  }
+}

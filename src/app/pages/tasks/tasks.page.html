@@ -1,0 +1,63 @@
+<ion-header>
+  <ion-toolbar class="blur-toolbar">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Tareas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="app-bg ion-padding">
+  <ion-item>
+    <ion-label>Filtro</ion-label>
+    <ion-segment [value]="filter" (ionChange)="onSegmentChange($event)">
+      <ion-segment-button value="todas">Todas</ion-segment-button>
+      <ion-segment-button value="pendientes">Pendientes</ion-segment-button>
+      <ion-segment-button value="completadas">Completadas</ion-segment-button>
+    </ion-segment>
+  </ion-item>
+
+  <ion-item lines="none">
+    <ion-label>
+      <p>Total: {{ total }} · Pendientes: {{ pendientes }} · Completadas: {{ completadas }}</p>
+    </ion-label>
+  </ion-item>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>{{ editId ? 'Editar tarea' : 'Nueva tarea' }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <form [formGroup]="form" (ngSubmit)="submit()">
+        <ion-item>
+          <ion-label position="floating">Nombre</ion-label>
+          <ion-input formControlName="nombre"></ion-input>
+        </ion-item>
+        <ion-text color="danger" *ngIf="nombre?.touched && nombre?.invalid">Nombre inválido</ion-text>
+
+        <ion-item>
+          <ion-label position="floating">Descripción</ion-label>
+          <ion-input formControlName="descripcion"></ion-input>
+        </ion-item>
+        <ion-text color="danger" *ngIf="descripcion?.touched && descripcion?.invalid">Descripción inválida</ion-text>
+
+        <ion-button expand="block" type="submit" [disabled]="form.invalid">
+          {{ editId ? 'Guardar cambios' : 'Agregar' }}
+        </ion-button>
+      </form>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-list>
+    <ion-item *ngFor="let t of filtered" #taskItem [attr.data-id]="t.id">
+      <ion-checkbox slot="start" [checked]="t.estado === 'completada'" (ionChange)="toggle(t)">
+        {{ t.estado === 'completada' ? 'Completada' : 'Pendiente' }}
+      </ion-checkbox>
+      <ion-label>
+        <h2>{{ t.nombre }}</h2>
+        <p>{{ t.descripcion }}</p>
+      </ion-label>
+      <ion-button fill="clear" color="primary" (click)="edit(t)" slot="end">Editar</ion-button>
+      <ion-button fill="clear" color="danger" (click)="remove(t)" slot="end">Eliminar</ion-button>
+    </ion-item>
+  </ion-list>
+</ion-content>

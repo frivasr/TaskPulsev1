@@ -1,0 +1,29 @@
+// Estilo claro y moderno para Perfil
+:host {
+  .app-bg {
+    --background: linear-gradient(135deg, #f8fafc, #eaf2ff);
+    min-height: 100%;
+    color: #0f172a;
+  }
+
+  .blur-toolbar {
+    --background: rgba(255, 255, 255, 0.92);
+    --color: #0f172a;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border-bottom: 1px solid rgba(2, 8, 23, 0.06);
+  }
+
+  ion-card {
+    --ion-card-background: #ffffff;
+    color: #0f172a;
+    border-radius: 14px;
+    box-shadow: 0 8px 24px rgba(2, 8, 23, 0.08);
+  }
+
+  :host-context(.dark) {
+    .app-bg { --background: linear-gradient(135deg, #0f172a, #0b1220); color: #ffffff; }
+    .blur-toolbar { --background: rgba(17, 24, 39, 0.92); --color: #ffffff; border-bottom-color: rgba(255,255,255,0.12); }
+    ion-card { --ion-card-background: rgba(23,32,45,1); color: #ffffff; box-shadow: 0 10px 24px rgba(0,0,0,0.35); }
+  }
+}

@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar class="blur-toolbar">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Perfil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="app-bg ion-padding">
+  <form [formGroup]="form" (ngSubmit)="guardar()">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Datos del usuario</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <mat-form-field appearance="fill" class="ion-margin-bottom">
+          <mat-label>Nombre</mat-label>
+          <input matInput formControlName="nombre" placeholder="Tu nombre" />
+          <mat-error *ngIf="nombre?.hasError('required')">El nombre es requerido</mat-error>
+          <mat-error *ngIf="nombre?.hasError('minlength')">Mínimo 2 caracteres</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="ion-margin-bottom">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" placeholder="tu@email.com" />
+          <mat-error *ngIf="email?.hasError('required')">El email es requerido</mat-error>
+          <mat-error *ngIf="email?.hasError('email')">Email inválido</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="ion-margin-bottom">
+          <mat-label>Edad</mat-label>
+          <input matInput type="number" formControlName="edad" placeholder="Edad" />
+          <mat-error *ngIf="edad?.hasError('required')">La edad es requerida</mat-error>
+          <mat-error *ngIf="edad?.hasError('min')">Debe ser positiva</mat-error>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Guardar</button>
+      </ion-card-content>
+    </ion-card>
+  </form>
+</ion-content>

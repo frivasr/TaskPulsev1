@@ -1,0 +1,40 @@
+<ion-content class="winlock-bg">
+  <div class="winlock-wrapper">
+    <div class="winlock-center">
+      <div class="app-title">TaskPulse</div>
+      <ion-avatar class="winlock-avatar">
+        <ion-icon name="person-circle-outline"></ion-icon>
+      </ion-avatar>
+      <div class="winlock-title">
+        <span>Iniciar sesión</span>
+      </div>
+
+      <form [formGroup]="form" (ngSubmit)="login()" class="winlock-form">
+        <ion-item class="winlock-input">
+          <ion-icon name="person-outline" slot="start"></ion-icon>
+          <ion-input formControlName="usuario" placeholder="Usuario"></ion-input>
+        </ion-item>
+        <ion-text color="danger" *ngIf="usuario?.touched && usuario?.hasError('required')">El usuario es requerido.</ion-text>
+
+        <ion-item class="winlock-input">
+          <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
+          <ion-input [type]="showPassword ? 'text' : 'password'" formControlName="password" placeholder="Contraseña"></ion-input>
+          <ion-button fill="clear" slot="end" (click)="toggleShowPassword()">
+            <ion-icon [name]="showPassword ? 'eye-off-outline' : 'eye-outline'"></ion-icon>
+          </ion-button>
+        </ion-item>
+        <ion-text color="danger" *ngIf="password?.touched && password?.hasError('minlength')">Mínimo 6 caracteres.</ion-text>
+
+        <ion-item lines="none" class="winlock-remember">
+          <ion-checkbox [checked]="remember" (ionChange)="remember = $event.detail.checked"></ion-checkbox>
+          <ion-label>Recordarme</ion-label>
+        </ion-item>
+
+        <ion-button class="winlock-submit" expand="block" type="submit" [disabled]="form.invalid">
+          Iniciar sesión
+        </ion-button>
+      </form>
+    </div>
+  </div>
+
+</ion-content>

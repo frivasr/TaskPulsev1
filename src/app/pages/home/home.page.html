@@ -1,0 +1,99 @@
+<ion-header>
+  <ion-toolbar class="blur-toolbar">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Home</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="app-bg ion-padding">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Bienvenido, {{ usuario }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p *ngIf="email">{{ email }}</p>
+      <ion-grid class="stats">
+        <ion-row>
+          <ion-col size="12" size-md="4">
+            <div class="stat">
+              <span class="stat-number">{{ total }}</span>
+              <span class="stat-label">Total</span>
+            </div>
+          </ion-col>
+          <ion-col size="12" size-md="4">
+            <div class="stat">
+              <span class="stat-number">{{ pendientes }}</span>
+              <span class="stat-label">Pendientes</span>
+            </div>
+          </ion-col>
+          <ion-col size="12" size-md="4">
+            <div class="stat">
+              <span class="stat-number">{{ completadas }}</span>
+              <span class="stat-label">Completadas</span>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <div class="timers">
+        <div class="timer-item">
+          <span class="timer-label">Tiempo activo pendientes</span>
+          <span class="timer-value">{{ activePendingDisplay }}</span>
+        </div>
+        <div class="timer-item">
+          <span class="timer-label">Promedio duración completadas</span>
+          <span class="timer-value">{{ avgCompletedDisplay }}</span>
+        </div>
+        <div class="timer-item">
+          <span class="timer-label">Pendiente más antigua</span>
+          <span class="timer-value">{{ oldestPendingDisplay }}</span>
+        </div>
+      </div>
+      <div *ngIf="recientes.length" class="recent">
+        <h3>Últimas tareas</h3>
+        <ion-list>
+          <ion-item *ngFor="let r of recientes">
+            <ion-label>
+              <h2>{{ r.nombre }}</h2>
+              <p>{{ r.descripcion }}</p>
+            </ion-label>
+            <ion-badge [color]="r.estado === 'completada' ? 'success' : 'medium'" slot="end">
+              {{ r.estado === 'completada' ? 'Listo' : 'Pendiente' }}
+            </ion-badge>
+            <ion-badge color="tertiary" class="time-badge" slot="end">
+              {{ r.estado === 'pendiente' ? 'Activo:' : 'Duración:' }} {{ formatDuration(getActiveMs(r)) }}
+            </ion-badge>
+          </ion-item>
+        </ion-list>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card #cardEl routerLink="/profile">
+    <ion-card-header>
+      <ion-card-title>Perfil</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      Ver y editar tu información.
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card #cardEl routerLink="/tasks">
+    <ion-card-header>
+      <ion-card-title>Tareas</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      Crea, edita y gestiona tus tareas. Total: {{ total }}
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card #cardEl routerLink="/settings">
+    <ion-card-header>
+      <ion-card-title>Configuración</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      Cambia el tema y opciones de la app.
+    </ion-card-content>
+  </ion-card>
+</ion-content>

@@ -1,0 +1,100 @@
+// Estilo futurista (neón) para Home
+:host {
+  .app-bg {
+    --background: linear-gradient(135deg, #0b1021, #1a1f3b);
+    min-height: 100%;
+    color: #eaf2ff;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .app-bg::before {
+    content: '';
+    position: absolute;
+    inset: -20% -10% -10% -20%;
+    background: radial-gradient(60% 60% at 30% 20%, rgba(125, 249, 255, 0.18) 0%, rgba(155, 93, 229, 0.14) 35%, rgba(0,0,0,0) 70%),
+                radial-gradient(45% 45% at 80% 70%, rgba(255, 89, 194, 0.12) 0%, rgba(0,0,0,0) 65%);
+    filter: blur(40px);
+    animation: bg-shift 16s ease-in-out infinite alternate;
+    pointer-events: none;
+  }
+
+  @keyframes bg-shift {
+    0% { transform: translate3d(0,0,0) scale(1); opacity: 0.8; }
+    50% { transform: translate3d(-2%, 1%, 0) scale(1.03); opacity: 1; }
+    100% { transform: translate3d(2%, -1%, 0) scale(1.02); opacity: 0.9; }
+  }
+
+  .blur-toolbar {
+    --background: rgba(10, 15, 30, 0.85);
+    --color: #eaf2ff;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(125, 249, 255, 0.35);
+    box-shadow: 0 4px 20px rgba(125, 249, 255, 0.12);
+  }
+
+  ion-card {
+    --ion-card-background: rgba(17, 24, 39, 0.88);
+    color: #eaf2ff;
+    border-radius: 16px;
+    border: 1px solid rgba(155, 93, 229, 0.25);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35), 0 0 18px rgba(125, 249, 255, 0.08);
+    transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
+  }
+
+  ion-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 38px rgba(0, 0, 0, 0.45), 0 0 24px rgba(125, 249, 255, 0.16);
+    border-color: rgba(125, 249, 255, 0.35);
+  }
+
+  .stats .stat { text-align: center; }
+  .stat-number {
+    font-size: 24px;
+    font-weight: 800;
+    color: #7df9ff;
+    text-shadow: 0 0 8px rgba(125, 249, 255, 0.4);
+  }
+  .stat-label { font-size: 12px; color: #b7c4d6; }
+
+  .timers {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin: 10px 0 4px;
+
+    .timer-item {
+      background: rgba(20, 28, 46, 0.72);
+      border: 1px solid rgba(125, 249, 255, 0.18);
+      border-radius: 12px;
+      padding: 10px 12px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .timer-label { font-size: 12px; color: #cbd6e3; }
+    .timer-value { font-weight: 700; color: #7df9ff; }
+  }
+
+  @media (min-width: 480px) {
+    .timers { grid-template-columns: 1fr 1fr; }
+  }
+  @media (min-width: 768px) {
+    .timers { grid-template-columns: 1fr 1fr 1fr; }
+  }
+
+  .recent h3 { margin: 8px 0 6px; font-size: 16px; }
+  .recent ion-item { --background: rgba(20, 28, 46, 0.72); border-radius: 12px; margin: 6px 0; }
+  .time-badge { --background: rgba(125, 249, 255, 0.18); color: #7df9ff; }
+
+  :host-context(.light), :host-context(.md) {
+    .app-bg { --background: linear-gradient(135deg, #eef3ff, #e7f3ff); color: #0f172a; }
+    .blur-toolbar { --background: rgba(255, 255, 255, 0.9); --color: #0f172a; border-bottom-color: rgba(125, 249, 255, 0.25); }
+    ion-card { --ion-card-background: #ffffff; color: #0f172a; box-shadow: 0 8px 24px rgba(2, 8, 23, 0.08); }
+    .stat-label { color: rgba(15,23,42,0.7); }
+    .recent ion-item { --background: #ffffff; }
+    .time-badge { --background: rgba(125, 249, 255, 0.2); color: #0f172a; }
+  }
+}

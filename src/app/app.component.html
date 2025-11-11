@@ -1,3 +1,28 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <ion-menu contentId="main-content">
+    <ion-header>
+      <ion-toolbar color="primary">
+        <ion-title>Menú</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-item lines="none">
+        <ion-label>
+          <h2>Usuario</h2>
+          <p>{{ usuario || 'No autenticado' }}</p>
+        </ion-label>
+        <ion-button fill="outline" color="medium" (click)="logout()" slot="end">Salir</ion-button>
+      </ion-item>
+      <ion-list>
+        <ion-item routerLink="/home" routerDirection="root">Home</ion-item>
+        <ion-item routerLink="/profile" routerDirection="root">Perfil</ion-item>
+        <ion-item routerLink="/tasks" routerDirection="root">Tareas</ion-item>
+        <ion-item routerLink="/settings" routerDirection="root">Configuración</ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+  <div class="ion-page" id="main-content">
+    <ion-router-outlet></ion-router-outlet>
+  </div>
 </ion-app>

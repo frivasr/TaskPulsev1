@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { NavController } from '@ionic/angular';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -7,5 +9,17 @@ import { Component } from '@angular/core';
   standalone: false,
 })
 export class AppComponent {
-  constructor() {}
+  usuario = '';
+
+  constructor(private navCtrl: NavController, private auth: AuthService) {}
+
+  ngOnInit() {
+    this.usuario = this.auth.getUserName();
+    this.auth.userName$.subscribe(name => this.usuario = name);
+  }
+
+  logout() {
+    this.auth.logout();
+    this.navCtrl.navigateRoot('/login');
+  }
 }
